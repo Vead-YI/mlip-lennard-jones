@@ -1,0 +1,2 @@
+# placeholder — training data will be saved here by data/generate_data.py
+# .npz files are excluded from git (see .gitignore)
