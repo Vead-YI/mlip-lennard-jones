@@ -24,6 +24,7 @@ class NeuralNetworkPotential(nn.Module):
     """
 
     def __init__(self, hidden_dims=None, activation=None):
+        
         super().__init__()
 
         if hidden_dims is None:
