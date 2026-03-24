@@ -66,20 +66,20 @@ Analytical LJ Potential
         │
         ▼
 ┌──────────────────┐
-│  Data Generation  │   ← Random configurations, compute E(r), F(r)
-│  (generate_data)  │
+│  Data Generation │   ← Random configurations, compute E(r), F(r)
+│  (generate_data) │
 └────────┬─────────┘
          │ 5,000 (r, E, F) samples
          ▼
 ┌──────────────────┐
-│   Neural Network  │   ← 3-layer FC NN: [1] → [128] → [128] → [64] → [1]
-│  (nn_potential)   │       ReLU activations, MSE loss, Adam optimizer
+│   Neural Network │   ← 3-layer FC NN: [1] → [128] → [128] → [64] → [1]
+│  (nn_potential)  │       ReLU activations, MSE loss, Adam optimizer
 └────────┬─────────┘
          │ Trained NNP
          ▼
 ┌──────────────────┐
-│  MD Simulation    │   ← Velocity Verlet, 10 particles, PBC
-│   (md_verlet)     │
+│  MD Simulation   │   ← Velocity Verlet, 10 particles, PBC
+│   (md_verlet)    │
 └──────────────────┘
 ```
 
@@ -257,7 +257,7 @@ If you found this project useful for your research, feel free to cite:
 ```bibtex
 @misc{vead_mlip_lennard_jones,
   title = {Machine Learning Interatomic Potential for Lennard-Jones System},
-  author = {Vead-YI},
+  author = {Zuyang Li},
   year = {2026},
   url = {https://github.com/Vead-YI/mlip-lennard-jones}
 }
