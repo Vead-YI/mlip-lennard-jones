@@ -24,9 +24,8 @@ training/checkpoints/
 *.pt
 *.pth
 
-# Results (generated figures — commit selectively)
-results/*.png
-results/*.pdf
+# Large generated files (exclude small results from gitignore)
+data/*.npy
 
 # Jupyter
 .ipynb_checkpoints/
