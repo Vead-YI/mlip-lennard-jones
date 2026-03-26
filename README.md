@@ -103,6 +103,21 @@ $$\mathcal{L} = \frac{1}{N} \sum_{i=1}^{N} \left( V_{\text{LJ}}(r_i) - \mathcal{
 - **Optimizer:** Adam with learning rate scheduling (ReduceLROnPlateau)
 - **Regularization:** Gradient clipping (max_norm=1.0), weight decay (1e-5), early stopping (patience=100)
 
+### Force Evaluation via Autodiff
+
+For molecular dynamics, forces are needed: $F(r) = -\frac{dV}{dr}$. Rather than training on force labels explicitly, forces are computed via **automatic differentiation**:
+
+$$F_{\text{NNP}}(r) = -\frac{\partial \mathcal{N}_\theta(r)}{\partial r}$$
+
+This approach exploits the fundamental relationship between energy and force. For single-component potentials like LJ, it yields excellent results:
+
+| Metric | Value |
+|--------|-------|
+| Force MAE | 0.73 ε/σ |
+| Force Correlation | **0.9976** |
+
+> **Note:** For multi-body potentials with complex symmetry functions, explicit **force matching** (training on both E and F) is recommended. This project demonstrates the simpler case where energy-only training suffices.
+
 ### Molecular Dynamics
 
 The trained NNP is used as the force field in a Velocity Verlet integration loop:
@@ -131,10 +146,12 @@ The NNP achieves near-perfect agreement with the analytical LJ potential across 
 
 | Metric | Value |
 |--------|-------|
-| MSE | 6.3 × 10⁻⁵ (normalized) |
-| MAE | 3.4 × 10⁻³ (normalized) |
-| R² Score | **0.999991** |
-| Best Epoch | 442 / 542 |
+| MSE | 3.6 × 10⁻⁵ (normalized) |
+| MAE | 1.8 × 10⁻³ (normalized) |
+| R² Score | **0.999995** |
+| Force MAE | 0.73 ε/σ |
+| Force Correlation | **0.9976** |
+| Best Epoch | 802 / 902 |
 
 ### 2. MD Energy Conservation
 
